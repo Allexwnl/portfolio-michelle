@@ -166,9 +166,26 @@ const logout = async () => {
     padding: 0.55rem 0.6rem;
     font-size: 0.85rem;
   }
+}
+
+/* Mobiel: tabbladen worden pillen die netjes afbreken i.p.v. horizontaal scrollen */
+@media (max-width: 640px) {
+  .dash-tabs-inner {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    overflow-x: visible;
+    padding-block: 0.7rem;
+  }
   .tab {
-    padding: 0.85rem 0.7rem;
-    font-size: 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.88rem;
+  }
+  .tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
   }
 }
 </style>
