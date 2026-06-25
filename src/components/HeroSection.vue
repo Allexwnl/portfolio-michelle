@@ -6,10 +6,20 @@
         <h1 class="hero-title">{{ s.name }}</h1>
         <p class="hero-intro">{{ s.intro }}</p>
         <div class="hero-cta">
-          <a href="#projecten" class="btn btn-primary" @click.prevent="scrollTo('projecten')">
+          <a
+            v-if="showProjectsCta"
+            href="#projecten"
+            class="btn btn-primary"
+            @click.prevent="scrollTo('projecten')"
+          >
             Bekijk mijn werk
           </a>
-          <a href="#ervaring" class="btn btn-ghost" @click.prevent="scrollTo('ervaring')">
+          <a
+            v-if="showExperienceCta"
+            href="#ervaring"
+            class="btn btn-ghost"
+            @click.prevent="scrollTo('ervaring')"
+          >
             Mijn ervaring
           </a>
         </div>
@@ -42,6 +52,12 @@ import { useSettings } from '../lib/useSettings.js'
 const props = defineProps({ firstSection: { type: String, default: 'projecten' } })
 const { state } = useSettings()
 const s = computed(() => state.settings)
+
+// Hero-knoppen volgen de zichtbaarheid van hun sectie (verborgen sectie -> geen knop).
+const visible = computed(() => s.value.sectionVisibility || {})
+const showProjectsCta = computed(() => visible.value.projects !== false)
+const showExperienceCta = computed(() => visible.value.experience !== false)
+
 const photo = computed(() => s.value.profilePhoto?.full || s.value.profilePhoto?.thumb || '')
 const initials = computed(() =>
   (s.value.name || 'M')
