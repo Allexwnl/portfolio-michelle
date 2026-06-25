@@ -78,8 +78,10 @@ const logout = async () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  height: 64px;
+  gap: 0.6rem 1rem;
+  flex-wrap: wrap;
+  min-height: 64px;
+  padding-block: 0.6rem;
 }
 .dash-brand {
   display: flex;
@@ -139,5 +141,34 @@ const logout = async () => {
 
 .dash-main {
   padding-top: 1.8rem;
+}
+
+/* Mobiel: header en tabs compacter zodat niets overloopt */
+@media (max-width: 560px) {
+  .dash-top-inner {
+    justify-content: center;
+  }
+  .dash-brand {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+  .dash-brand h1 {
+    font-size: 1.15rem;
+  }
+  .dash-actions {
+    flex: 1 1 100%;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .dash-actions .adm-btn {
+    flex: 1 1 0;
+    justify-content: center;
+    padding: 0.55rem 0.6rem;
+    font-size: 0.85rem;
+  }
+  .tab {
+    padding: 0.85rem 0.7rem;
+    font-size: 0.9rem;
+  }
 }
 </style>

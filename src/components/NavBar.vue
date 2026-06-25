@@ -23,19 +23,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useSettings } from '../lib/useSettings.js'
 
 const { state } = useSettings()
-const name = ref(state.settings.name)
+const name = computed(() => state.settings.name)
 const router = useRouter()
 
-const links = [
-  { hash: 'tijdlijn', label: 'Tijdlijn' },
-  { hash: 'ervaring', label: 'Ervaring' },
-  { hash: 'projecten', label: 'Projecten' },
-]
+// Nav-links volgen de zichtbaarheid + volgorde van de homepagina-secties:
+// een verborgen sectie verschijnt niet in de navigatie.
+const SECTION_LINKS = {
+  timeline: { hash: 'tijdlijn', label: 'Tijdlijn' },
+  experience: { hash: 'ervaring', label: 'Ervaring' },
+  projects: { hash: 'projecten', label: 'Projecten' },
+}
+const links = computed(() => {
+  const order = state.settings.sectionOrder || []
+  const vis = state.settings.sectionVisibility || {}
+  return order.filter((k) => vis[k] && SECTION_LINKS[k]).map((k) => SECTION_LINKS[k])
+})
 
 const open = ref(false)
 const scrolled = ref(false)
@@ -54,8 +61,6 @@ const onScroll = () => (scrolled.value = window.scrollY > 24)
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
   onScroll()
-  // Naam kan na het laden van instellingen veranderen.
-  setTimeout(() => (name.value = state.settings.name), 600)
 })
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
