@@ -171,7 +171,8 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.6rem 1rem;
+  flex-wrap: wrap;
   padding: 0.8rem 0;
   border-bottom: 1px solid var(--line);
 }
@@ -182,13 +183,18 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 0.9rem;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 .sec-arrows {
   display: flex;
   gap: 0.3rem;
+  flex: 0 0 auto;
 }
 .sec-name {
   font-weight: 600;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .switch {
@@ -196,6 +202,7 @@ onMounted(async () => {
   align-items: center;
   gap: 0.6rem;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 .switch input {
   display: none;
