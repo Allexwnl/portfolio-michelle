@@ -1,0 +1,189 @@
+/* ============================================================
+   Design-systeem — clean, modern, editorial.
+   Eén accentkleur (via --accent, in dashboard aanpasbaar).
+   ============================================================ */
+
+:root {
+  /* Kleuren */
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --surface-2: #f4f1ec;
+  --line: #e7e2da;
+  --text: #1c1a18;
+  --text-soft: #6b645c;
+  --text-faint: #9b938a;
+  --accent: #c2766a; /* wordt overschreven vanuit site-instellingen */
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --accent-ink: #ffffff;
+
+  /* Typografie */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Maatvoering */
+  --maxw: 1180px;
+  --gutter: clamp(1.1rem, 4vw, 2.75rem);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(28, 26, 24, 0.04), 0 2px 8px rgba(28, 26, 24, 0.05);
+  --shadow-md: 0 6px 18px rgba(28, 26, 24, 0.08), 0 18px 50px rgba(28, 26, 24, 0.08);
+
+  /* Beweging */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 0.2s;
+  --t-med: 0.45s;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Layout-helpers ---- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(3.5rem, 9vw, 7rem);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 1.2rem + 3vw, 3.1rem);
+  margin-block: 0.35rem 0.5rem;
+}
+
+.lead {
+  color: var(--text-soft);
+  max-width: 60ch;
+}
+
+/* ---- Knoppen ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast),
+    box-shadow var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--text);
+}
+.btn-ghost:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---- Scroll-reveal ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Pagina-overgang (router) ---- */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease);
+}
+.fade-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

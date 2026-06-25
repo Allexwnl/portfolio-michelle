@@ -1,0 +1,168 @@
+/* Gedeelde stijlen voor het dashboard (globaal geïmporteerd in DashBoard.vue). */
+
+.adm-field {
+  display: block;
+  margin-bottom: 1rem;
+}
+.adm-field > span {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: var(--text-soft);
+}
+.adm-input,
+.adm-textarea,
+.adm-select {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.adm-textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.55;
+}
+.adm-input:focus,
+.adm-textarea:focus,
+.adm-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.adm-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(1.1rem, 3vw, 1.7rem);
+}
+.adm-card + .adm-card {
+  margin-top: 1.2rem;
+}
+
+.adm-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.adm-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+@media (max-width: 620px) {
+  .adm-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.55rem 1.05rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--t-fast);
+}
+.adm-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.adm-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.adm-btn.primary:hover {
+  filter: brightness(1.05);
+  color: var(--accent-ink);
+}
+.adm-btn.danger:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+.adm-btn.icon {
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-sm);
+}
+.adm-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.adm-section-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+.adm-hint {
+  color: var(--text-faint);
+  font-size: 0.88rem;
+  margin-bottom: 1.2rem;
+}
+
+.adm-empty {
+  color: var(--text-faint);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.adm-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+
+.adm-status {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+.adm-status.ok {
+  color: #2e7d32;
+}
+.adm-status.err {
+  color: #c0392b;
+}
+
+/* Bestand-knop (mooie wrapper rond <input type=file>) */
+.adm-file {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px dashed var(--line);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: border-color var(--t-fast), color var(--t-fast);
+}
+.adm-file:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.adm-file input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}

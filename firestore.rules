@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Wie mag schrijven: alleen de admin-accounts (zie src/config.js).
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'alexanderzoet@gmail.com',
+          'michellejonk17@gmail.com'
+        ];
+    }
+
+    // Publieke portfolio: iedereen mag lezen, alleen admins schrijven.
+    match /projects/{id}    { allow read: if true; allow write: if isAdmin(); }
+    match /timeline/{id}    { allow read: if true; allow write: if isAdmin(); }
+    match /experience/{id}  { allow read: if true; allow write: if isAdmin(); }
+    match /siteSettings/{id}{ allow read: if true; allow write: if isAdmin(); }
+  }
+}
