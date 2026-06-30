@@ -57,6 +57,13 @@ export async function uploadImage(file) {
   return res.json() // { full, thumb }
 }
 
+// Zet oude jsDelivr-URL's om naar raw GitHub. jsDelivr serveert sommige (nieuwe) repos
+// niet -> 503; raw werkt direct en is per commit-SHA permanent. Veilig op alle URL's.
+export const cdnUrl = (u) =>
+  typeof u === 'string'
+    ? u.replace(/https:\/\/cdn\.jsdelivr\.net\/gh\/([^@]+)@/, 'https://raw.githubusercontent.com/$1/')
+    : u
+
 // Verwijdert foto's uit GitHub op basis van hun CDN-URL's.
 export async function deleteImages(urls) {
   const clean = (urls || []).filter(Boolean)

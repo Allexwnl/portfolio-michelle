@@ -6,7 +6,7 @@
       <!-- Cover / titel -->
       <header class="p-hero">
         <div v-if="project.cover?.full || project.cover?.thumb" class="p-cover">
-          <img :src="project.cover.full || project.cover.thumb" :alt="project.title" />
+          <img :src="cdnUrl(project.cover.full || project.cover.thumb)" :alt="project.title" />
           <div class="p-cover-veil"></div>
         </div>
         <div class="container p-hero-inner" :class="{ 'no-cover': !hasCover }">
@@ -72,6 +72,7 @@ import YouTubeEmbed from '../components/YouTubeEmbed.vue'
 import { db } from '../firebase/firebase.js'
 import { doc, getDoc } from 'firebase/firestore'
 import { youtubeId } from '../lib/youtube.js'
+import { cdnUrl } from '../lib/imageProcessing.js'
 
 const route = useRoute()
 const project = ref(null)

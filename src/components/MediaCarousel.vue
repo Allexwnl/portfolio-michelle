@@ -4,7 +4,7 @@
       <transition :name="dir" mode="out-in">
         <img
           :key="index"
-          :src="images[index].full || images[index].thumb"
+          :src="cdnUrl(images[index].full || images[index].thumb)"
           :alt="`Afbeelding ${index + 1}`"
           class="slide"
           loading="lazy"
@@ -32,6 +32,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { cdnUrl } from '../lib/imageProcessing.js'
 
 const props = defineProps({ images: { type: Array, default: () => [] } })
 const index = ref(0)

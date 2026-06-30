@@ -48,6 +48,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useSettings } from '../lib/useSettings.js'
+import { cdnUrl } from '../lib/imageProcessing.js'
 
 const props = defineProps({ firstSection: { type: String, default: 'projecten' } })
 const { state } = useSettings()
@@ -58,7 +59,7 @@ const visible = computed(() => s.value.sectionVisibility || {})
 const showProjectsCta = computed(() => visible.value.projects !== false)
 const showExperienceCta = computed(() => visible.value.experience !== false)
 
-const photo = computed(() => s.value.profilePhoto?.full || s.value.profilePhoto?.thumb || '')
+const photo = computed(() => cdnUrl(s.value.profilePhoto?.full || s.value.profilePhoto?.thumb || ''))
 const initials = computed(() =>
   (s.value.name || 'M')
     .split(' ')

@@ -44,7 +44,9 @@ export const handler = async (event) => {
     const thumbPath = `images/${baseName}_thumb.webp`
     const fullSha = await put(fullPath, fullB64)
     const thumbSha = await put(thumbPath, thumbB64)
-    const cdn = (sha, path) => `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${sha}/${path}`
+    // ponytail: raw.githubusercontent ipv jsDelivr — jsDelivr indexeert nieuwe repos soms dagen niet (503).
+    // Per commit-SHA is de raw-URL permanent. Terug naar jsDelivr kan zodra de repo daar wél werkt.
+    const cdn = (sha, path) => `https://raw.githubusercontent.com/${owner}/${repo}/${sha}/${path}`
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },

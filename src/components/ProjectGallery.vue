@@ -42,12 +42,13 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { db } from '../firebase/firebase.js'
 import { collection, query, orderBy, limit, startAfter, getDocs } from 'firebase/firestore'
+import { cdnUrl } from '../lib/imageProcessing.js'
 
 const router = useRouter()
 const open = (id) => router.push(`/project/${id}`)
 
 // Cover kan een object {full, thumb} zijn (of leeg).
-const coverSrc = (p) => p.cover?.thumb || p.cover?.full || ''
+const coverSrc = (p) => cdnUrl(p.cover?.thumb || p.cover?.full || '')
 
 const PAGE_SIZE = 9
 const projects = ref([])
